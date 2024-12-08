@@ -1,4 +1,4 @@
-package org.example.managment.model.enums;
+package org.example.management.model.enums;
 
 public enum Role {
     ROLE_ADMIN,

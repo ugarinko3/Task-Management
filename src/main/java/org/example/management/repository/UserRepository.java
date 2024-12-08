@@ -1,6 +1,6 @@
-package org.example.managment.repository;
+package org.example.management.repository;
 
-import org.example.managment.model.entity.User;
+import org.example.management.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

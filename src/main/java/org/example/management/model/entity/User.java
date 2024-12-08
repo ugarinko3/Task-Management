@@ -1,10 +1,10 @@
-package org.example.managment.model.entity;
+package org.example.management.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.managment.model.enums.Role;
+import org.example.management.model.enums.Role;
 
 import jakarta.persistence.*;
 

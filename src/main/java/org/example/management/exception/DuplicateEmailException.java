@@ -1,4 +1,4 @@
-package org.example.managment.exception;
+package org.example.management.exception;
 
 public class DuplicateEmailException extends RuntimeException {
     public DuplicateEmailException(String message) {

@@ -1,4 +1,4 @@
-package org.example.managment.exception;
+package org.example.management.exception;
 
 /**
  * Не заполненые поля

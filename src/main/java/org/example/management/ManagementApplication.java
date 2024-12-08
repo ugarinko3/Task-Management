@@ -1,4 +1,4 @@
-package org.example.managment;
+package org.example.management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

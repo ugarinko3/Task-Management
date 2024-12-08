@@ -1,8 +1,8 @@
-package org.example.managment.service;
+package org.example.management.service;
 
 import io.jsonwebtoken.*;
 import lombok.AllArgsConstructor;
-import org.example.managment.model.request.UserRequest;
+import org.example.management.model.request.UserRequest;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
