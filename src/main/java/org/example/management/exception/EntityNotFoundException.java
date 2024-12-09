@@ -1,7 +1,7 @@
 package org.example.management.exception;
 
 /**
- * Не заполненые поля
+ * Исключение, для обозначения того, что сущность не найдена
  */
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException(String message) {

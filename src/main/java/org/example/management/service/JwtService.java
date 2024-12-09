@@ -17,35 +17,39 @@ public class JwtService {
     private SecretKey secret;
 
     public JwtService() {
-        byte[] keyBytes = "2f73bb18fdf365a62cad45d8841f135dcbd6fbb1dcf5311b6240d96cde65f764".getBytes(StandardCharsets.UTF_8);
+        byte[] keyBytes = "2f73bb18fdf365a62cad45d8841f135dcbd6fbb1dcf5311b6240d96cde65f764" .getBytes(StandardCharsets.UTF_8);
         this.secret = new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256"); // Укажите алгоритм
     }
 
+    /**
+     * Генерация токена
+     *
+     * @param email
+     * @param password
+     * @return
+     */
     public String generateToken(String email, String password) {
-
         return Jwts.builder()
                 .setSubject(email)
                 .claim("email", email)
                 .claim("password", password)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000))  // Токен истекает через 1 час
-                .signWith(secret)
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
-
     /**
-     *  Получение email и password с token
+     * Получение email и password с token
      *
      * @param token JWT
      * @return Возвращает {@link UserRequest}
      */
     public UserRequest getEmailAndPassword(String token) {
-        Claims claims = Jwts.parserBuilder()
+        Claims claims = Jwts.parser()
                 .setSigningKey(secret)
-                .build()
-                .parseClaimsJws(token)  // Разбираем токен
-                .getBody();  // Получаем тело токена
+                .parseClaimsJws(token)
+                .getBody();
 
         String email = claims.get("email", String.class);
         String password = claims.get("password", String.class);
@@ -56,25 +60,35 @@ public class JwtService {
         return userRequest;
     }
 
+    /**
+     * Получение почты с токена
+     *
+     * @param token
+     * @return
+     */
     public String extractEmail(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(secret) // Преобразуем секрет в массив байтов
-                .build()
-                .parseClaimsJws(token)  // Разбираем токен
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
                 .getBody()
-                .getSubject();  // Извлекаем email из токена
+                .getSubject();
     }
 
+    /**
+     * Проверка на валидацию токена
+     *
+     * @param token
+     * @return
+     */
     public boolean isTokenValid(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(secret)  // Указываем ключ для подписи
-                    .build()
-                    .parseClaimsJws(token);  // Разбираем токен
+            Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token);
 
-            return true;  // Токен валиден
+            return true;
         } catch (JwtException | IllegalArgumentException e) {
-            return false;  // Токен невалиден
+            return false;
         }
     }
 }

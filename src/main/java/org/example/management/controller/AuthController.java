@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
 
 @Tag(name = "Аутентификация")
 @RestController
@@ -19,18 +20,13 @@ public class AuthController {
 
     @Operation(summary = "Регистрация")
     @PostMapping("/registration")
-    public ResponseEntity<String> register(@RequestHeader(value = "token", required = false) String token)  {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(authService.registerUser(token));
+    public ResponseEntity<UUID> register(@RequestHeader(value = "token") String token) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.registerUser(token));
     }
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "Succes";
-    }
-    @GetMapping("/user")
-    public String user() {
-        return "Succes";
+    @Operation(summary = "Авторизация")
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestHeader(value = "token") String token) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.authorization(token));
     }
 }
-
