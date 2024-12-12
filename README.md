@@ -25,7 +25,6 @@
 ```
  OpenJDK v.17  
  Maven v.3.9.9
-
 ```
 
 
