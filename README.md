@@ -20,6 +20,15 @@
 ```
 ## Запуск проекта
 
+
+### Версии
+```
+ OpenJDK v.17  
+ Maven v.3.9.9
+
+```
+
+
 ```bash 
 mvn clean package
 ```
